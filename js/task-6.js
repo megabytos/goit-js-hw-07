@@ -4,15 +4,10 @@ function getRandomHexColor() {
     .padStart(6, 0)}`;
 }
 
-function createBoxes(amount) {  
-  for (let i = 0; i < amount; i++) {
-    const randomColor = getRandomHexColor();
-    const elem = document.createElement('div');
-    elem.style.width = `${30 + i * 10}px`;
-    elem.style.height = elem.style.width;
-    elem.style.backgroundColor = randomColor;
-    document.querySelector('#boxes').appendChild(elem);
-  }
+function createBoxes(amount) {
+  document.querySelector('#boxes').insertAdjacentHTML('afterbegin',
+      [...Array(amount).keys()].map(i => `<div style="width:${30 + i * 10}px; height:${30 + i * 10}px; background-color: ${getRandomHexColor()}"></div>`).join('')
+    );
 }
 
 function destroyBoxes() {
@@ -23,7 +18,7 @@ document.querySelector('button[data-create]').addEventListener('click', () => {
   const amount = document.querySelector('#controls input[type="number"]');
   if (amount.value > 0 && amount.value <= 100) {
     destroyBoxes();
-    createBoxes(amount.value);
+    createBoxes(Number(amount.value));
     amount.value = '';
   }
 });

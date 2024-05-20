@@ -8,6 +8,6 @@ form.addEventListener('submit', event => {
     alert('All form fields must be filled in');
   } else {
     console.log({ email: emailValue, password: passwordValue });
-  }
-  form.reset();
+    form.reset();
+  }  
 });
